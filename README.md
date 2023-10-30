@@ -459,9 +459,544 @@ As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
 
-### Verilog Code
+## Verilog Code
+-----------------------------------
+### Block Chooser
+
+//NOTE: Input B7 will be XOR of all sensors(clocks) present for each slot
+//The output block number will be the button number which is pressed last (when slot is empty, which is handled in logisim)
+//Bk is actually is button pressed & if free slot is available(from BlockCircuit code)
+//Note, simulation may not seem perfect since it is not that very feasible to simulate buttons through veriolog
+
+module dflipflop (input D, input CKT, output reg Q);
+    always @(posedge CKT) begin
+        Q <= D;
+    end
+endmodule
+
+module PriorityEncoder(i,y);
+    input [7:0]i;
+    output [2:0]y;
+
+    assign y[2]=i[4] | i[5] | i[6] | i[7];
+    assign y[1]=i[2] | i[3] | i[6] | i[7];
+    assign y[0]=i[1] | i[3] | i[5] | i[7];
+
+endmodule
+
+module BlockChooser(B,F);
+    input [7:0]B;
+    wire CKT;
+    wire [7:0]W;
+    output [2:0]F;
+
+    or O1(CKT,B[0],B[1],B[2],B[3],B[4],B[5],B[6],B[7]);
+    
+    dflipflop s0 (.D(B[0]), .CKT(CKT), .Q(W[0]));
+    dflipflop s1 (.D(B[1]), .CKT(CKT), .Q(W[1]));
+    dflipflop s2 (.D(B[2]), .CKT(CKT), .Q(W[2]));
+    dflipflop s3 (.D(B[3]), .CKT(CKT), .Q(W[3]));
+    dflipflop s4 (.D(B[4]), .CKT(CKT), .Q(W[4]));
+    dflipflop s5 (.D(B[5]), .CKT(CKT), .Q(W[5]));
+    dflipflop s6 (.D(B[6]), .CKT(CKT), .Q(W[6]));
+    dflipflop s7 (.D(B[7]), .CKT(CKT), .Q(W[7]));
+    
+    PriorityEncoder p1(B,F);
+
+endmodule
 
 
+module BlockChooser_tb;
+
+reg [7:0]B;
+wire [2:0]F;
+
+BlockChooser b1(B,F);
+
+initial begin
+    $dumpfile("BlockChooser.vcd");
+    $dumpvars(0,BlockChooser_tb);
+end
+initial begin
+    $display("|B0 |B1 |B2 |B3 |B4 |B5 |B6 |B7 | BlockNumber |");
+    $monitor("| %b | %b | %b | %b | %b | %b | %b | %b |     %b     |",B[0],B[1],B[2],B[3],B[4],B[5],B[6],B[7],F);
+    
+    //Let B and be something intially
+    B=8'b10000000;
+    
+    //let Button 5 be pressed now
+    #110 B=8'b00100000;
+    //button is released now
+
+    //For a while no button is pressed 
+    //But still, path to block 5 is shown
+
+    //When car is parked, button 7 will get activated
+    //Can be understood from logisim code
+    //When car is entering, only 1 out of the 21 sensors(clocks) is 1 (odd parity, so xor gives 1 as output)
+    //So the xor part will give output 1 which is button 7 
+    //So button 7 is pressed technically
+    //Once the car is parked
+    //That sensor(clock) will return 0  
+    //So xor of all will become 0 again, as 0 sensors are 1 (0 is even parity, so xor gives 0 as output)
+    //So button is released again
+    //And path to block 7, empty path is shown
+    #170 B=8'b10000000;
+
+    //let Button 1 be pressed now
+    #210 B=8'b00000010;
+    //button is released now
+    
+    //For a while no button is pressed 
+    //But still, path to block 1 is shown
+
+    //When car is parked, button 7 will get activated
+    //Can be understood from logisim code
+    //When car is entering, only 1 out of the 21 sensors(clocks) is 1 (odd parity, so xor gives 1 as output)
+    //So the xor part will give output 1 which is button 7 
+    //So button 7 is pressed technically
+    //Once the car is parked
+    //That sensor(clock) will return 0  
+    //So xor of all will become 0 again, as 0 sensors are 1 (0 is even parity, so xor gives 0 as output)
+    //So button is released again
+    //And path to block 7, empty path is shown
+    #270 B=8'b10000000;
+
+end
+
+initial #10000 $finish;
+    
+endmodule
+-------------------------
+
+### Block Circuit
+
+--------------------------------
+module dflipflop (input D, input CKT, output reg Q);
+    always @(posedge CKT) begin
+        Q <= D;
+    end
+endmodule
+
+module block (input D1, input D2, input D3, input CKT1, input CKT2, input CKT3, output Q1, output Q2, output Q3, output Free);
+    wire Q1_wire, Q2_wire, Q3_wire;
+    
+    dflipflop s1 (.D(D1), .CKT(CKT1), .Q(Q1_wire));
+    dflipflop s2 (.D(D2), .CKT(CKT2), .Q(Q2_wire));
+    dflipflop s3 (.D(D3), .CKT(CKT3), .Q(Q3_wire));
+    
+    assign Q1 = Q1_wire;
+    assign Q2 = Q2_wire;
+    assign Q3 = Q3_wire;
+
+    nand m1(Free, Q1,Q2,Q3);
+endmodule
+
+
+module block_tb;
+
+reg D1,D2,D3,CKT1=0,CKT2=0,CKT3=0;
+wire Q1,Q2,Q3,free;
+block d(D1,D2,D3,CKT1,CKT2,CKT3,Q1,Q2,Q3,free);
+
+always begin
+    CKT1=~CKT1;
+    #10;
+end
+
+always begin
+    CKT2=~CKT2;
+    #20;
+end
+
+always begin
+    CKT3=~CKT3;
+    #30;
+end
+
+initial begin
+    $dumpfile("block.vcd");
+    $dumpvars(0,block_tb);
+end
+initial begin
+    $display("|Q1 |Q2 |Q3 |Free?|");
+    $monitor("| %b | %b | %b |  %b  |",Q1,Q2,Q3,free);
+    D1=1'b0;D2=1'b0;D3=1'b0;
+    
+    #20 D1=1'b1;
+    #40 D2=1'b1;
+    #60 D3=1'b1;
+    #80 D1=1'b0;
+    #100 D1=1'b1;
+    #120 D1=1'b0;
+    #140 D3=1'b0;
+    #160 D2=1'b0;
+end
+
+initial #5000 $finish;
+    
+endmodule
+
+----------------------------------------------
+
+### Junction Code
+
+-----------------------------------------------
+
+module mux(a,b,c,d,sel,out);   // 4*1 mux
+
+input a,b,c,d;
+input [1:0]sel;
+output out;
+
+assign out = (!sel[1] && !sel[0] && a)
+                || (!sel[1] && sel[0] && b)
+                || (sel[1] && !sel[0] && c)
+                || (sel[1] && sel[0] && d);
+
+endmodule
+
+
+module Junction4(InputDir,PathData,NL,SL,EL,WL);
+    input [1:0]InputDir;
+    output [1:0]OutputDir;
+    input [7:0]PathData;
+    output [7:0]NewPath;
+    output NL,SL,EL,WL;
+
+    wire [1:0]dir;
+    assign dir = PathData[7:6];
+
+    wire dis;
+    assign dis = dir[0] || dir[1];
+
+    mux m1(!InputDir[1],!InputDir[0],InputDir[0],InputDir[1],dir,OutputDir[1]);
+    mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
+   
+
+    assign NL = dis && (!OutputDir[1] && !OutputDir[0]);
+    assign SL = dis && (OutputDir[1] && OutputDir[0]);
+    assign EL = dis && (OutputDir[1] && !OutputDir[0]);
+    assign WL = dis && (!OutputDir[1] && OutputDir[0]);
+
+    assign NewPath = PathData << 2;
+
+
+endmodule
+
+
+module Junction4_tb;
+
+    reg [1:0] InputDir;
+    reg [7:0] PathData;
+    wire NL, SL, EL, WL;
+    wire [1:0] OutputDir;
+
+    Junction4 uut (InputDir,PathData,NL,SL,EL,WL);
+
+
+    initial begin
+        $dumpfile("Junction4.vcd");
+        $dumpvars(0, Junction4_tb);
+
+        $display("--------------------------------------------------");
+        $display("| InputDir | PathData    | NL  | SL  | EL  | WL  |");
+        $display("--------------------------------------------------");
+        $monitor("|    %b    |   %b  |  %b  |  %b  |  %b  |  %b  |",
+                 InputDir, PathData, NL, SL, EL, WL);
+
+        
+        InputDir = 2'b00;
+        PathData = 8'b00000000;
+        #10 PathData = 8'b01000000;
+        #20 PathData = 8'b10000000;
+        #30 PathData = 8'b11000000;
+        
+        #40
+        InputDir = 2'b11;
+        PathData = 8'b00000000;
+        #50 PathData = 8'b01000000;
+        #60 PathData = 8'b10000000;
+        #70 PathData = 8'b11000000;
+        
+        #80
+        InputDir = 2'b01;
+        PathData = 8'b00000000;
+        #90 PathData = 8'b01000000;
+        #100 PathData = 8'b10000000;
+        #110 PathData = 8'b11000000;
+        
+        #120
+        InputDir = 2'b10;
+        PathData = 8'b00000000;
+        #130 PathData = 8'b01000000;
+        #140 PathData = 8'b10000000;
+        #150 PathData = 8'b11000000;
+        
+        #1000 $display("--------------------------------------------------");
+
+    end
+endmodule
+
+------------------------
+
+### Junction Simulation
+
+------------------------------------
+
+//We choose path data such that there is only one unique input direction to each junction
+// Eg. The only path to Junction3 is 1101, 11 at Junction1 and 01 at Junction2
+// Junction3 can only recieve input from Junction2
+
+//Block input will be given from the Button code
+
+module Display(Block,PathData,NL1,SL1,EL1,WL1,NL2,SL2,EL2,WL2,NL3,SL3,EL3,WL3,NL4,SL4,EL4,WL4);
+
+    input [2:0]Block;
+    wire [1:0]InputDir;
+    output [7:0]PathData;
+
+    assign InputDir=2'b00;
+    PathFinder m1(Block,PathData);
+
+    output NL1,SL1,EL1,WL1,NL2,SL2,EL2,WL2,NL3,SL3,EL3,WL3,NL4,SL4,EL4,WL4;
+   
+    wire [1:0]InputDir2,InputDir3,InputDir4;
+    wire [1:0]OutputDir1,OutputDir2;
+    wire [7:0]NewPath1,NewPath2;
+    wire [7:0]PathData2,PathData3,PathData4;
+   
+    Junction1 j1(InputDir,PathData,NL1,SL1,EL1,WL1,OutputDir1,NewPath1);
+    assign InputDir2 = OutputDir1;
+    assign PathData2[7] = NewPath1[7] && NL1;
+    assign PathData2[6] = NewPath1[6] && NL1;
+    assign PathData2[5:0] = NewPath1[5:0];
+   
+    Junction2 j2(InputDir2,PathData2,NL2,SL2,EL2,WL2,OutputDir2,NewPath2);
+    assign InputDir3 = OutputDir2;
+    assign PathData3[7] = NewPath2[7] && EL2;
+    assign PathData3[6] = NewPath2[6] && EL2;
+    assign PathData3[5:0] = NewPath2[5:0];
+    assign InputDir4 = OutputDir2;
+    assign PathData4[7] = NewPath2[7] && NL2;
+    assign PathData4[6] = NewPath2[6] && NL2;
+    assign PathData4[5:0] = NewPath2[5:0];
+   
+    Junction3 j3(InputDir3,PathData3,NL3,SL3,EL3,WL3);
+    Junction4 j4(InputDir4,PathData4,NL4,SL4,EL4,WL4);
+   
+endmodule
+
+//Multiplexer for each out index required for PathFinder
+module mux1(a,i0,i1,i2,i3,i4,i5,i6,i7,o);
+
+input [2:0]a;
+input i0,i1,i2,i3,i4,i5,i6,i7;
+output o;
+
+assign o = (!a[2] && !a[1] && !a[0] && i0) ||
+   (!a[2] && !a[1] && a[0] && i1) ||
+   (!a[2] && a[1] && !a[0] && i2) ||
+   (!a[2] && a[1] && a[0] && i3) ||
+   (a[2] && !a[1] && !a[0] && i4) ||
+   (a[2] && !a[1] && a[0] && i5) ||
+   (a[2] && a[1] && !a[0] && i6) ||
+   (a[2] && a[1] && a[0] && i7);
+
+endmodule
+
+
+module PathFinder(a,out);        //Like 8*1 mux
+
+input [2:0]a;
+output [7:0]out;
+wire [7:0]a0,a1,a2,a3,a4,a5,a6,a7;
+
+assign a0=8'b11111000;
+assign a1=8'b11110000;
+assign a2=8'b11010000;
+assign a3=8'b11011100;
+assign a4=8'b11000000;
+assign a5=8'b11010000;
+assign a6=8'b11010100;
+assign a7=8'b00000000;
+
+mux1 m7(a,a0[7],a1[7],a2[7],a3[7],a4[7],a5[7],a6[7],a7[7],out[7]);
+mux1 m6(a,a0[6],a1[6],a2[6],a3[6],a4[6],a5[6],a6[6],a7[6],out[6]);
+mux1 m5(a,a0[5],a1[5],a2[5],a3[5],a4[5],a5[5],a6[5],a7[5],out[5]);
+mux1 m4(a,a0[4],a1[4],a2[4],a3[4],a4[4],a5[4],a6[4],a7[4],out[4]);
+mux1 m3(a,a0[3],a1[3],a2[3],a3[3],a4[3],a5[3],a6[3],a7[3],out[3]);
+mux1 m2(a,a0[2],a1[2],a2[2],a3[2],a4[2],a5[2],a6[2],a7[2],out[2]);
+   
+assign out[1]=1'b0;
+assign out[0]=1'b0;
+
+
+endmodule
+
+
+
+module mux(a,b,c,d,sel,out);   // 4*1 mux
+
+input a,b,c,d;
+input [1:0]sel;
+output out;
+
+assign out = (!sel[1] && !sel[0] && a)
+                || (!sel[1] && sel[0] && b)
+                || (sel[1] && !sel[0] && c)
+                || (sel[1] && sel[0] && d);
+
+endmodule
+
+
+module Junction1(InputDir,PathData,NL,SL,EL,WL,OutputDir,NewPath);
+    input [1:0]InputDir;
+    output [1:0]OutputDir;
+    input [7:0]PathData;
+    output [7:0]NewPath;
+    output NL,SL,EL,WL;
+
+    wire [1:0]dir;
+    assign dir = PathData[7:6];
+
+    wire dis;
+    assign dis = dir[0] || dir[1];
+
+    mux m1(!InputDir[1],!InputDir[0],InputDir[0],InputDir[1],dir,OutputDir[1]);
+    mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
+   
+
+    assign NL = dis && (!OutputDir[1] && !OutputDir[0]);
+    assign SL = dis && (OutputDir[1] && OutputDir[0]);
+    assign EL = dis && (OutputDir[1] && !OutputDir[0]);
+    assign WL = dis && (!OutputDir[1] && OutputDir[0]);
+
+    assign NewPath = PathData << 2;
+
+endmodule
+
+module Junction2(InputDir,PathData,NL,SL,EL,WL,OutputDir,NewPath);
+    input [1:0]InputDir;
+    output [1:0]OutputDir;
+    input [7:0]PathData;
+    output [7:0]NewPath;
+    output NL,SL,EL,WL;
+
+    wire [1:0]dir;
+    assign dir = PathData[7:6];
+
+    wire dis;
+    assign dis = dir[0] || dir[1];
+
+    mux m1(!InputDir[1],!InputDir[0],InputDir[0],InputDir[1],dir,OutputDir[1]);
+    mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
+   
+
+    assign NL = dis && (!OutputDir[1] && !OutputDir[0]);
+    assign SL = dis && (OutputDir[1] && OutputDir[0]);
+    assign EL = dis && (OutputDir[1] && !OutputDir[0]);
+    assign WL = dis && (!OutputDir[1] && OutputDir[0]);
+
+    assign NewPath = PathData << 2;
+
+endmodule
+
+
+module Junction3(InputDir,PathData,NL,SL,EL,WL);
+    input [1:0]InputDir;
+    output [1:0]OutputDir;
+    input [7:0]PathData;
+    output [7:0]NewPath;
+    output NL,SL,EL,WL;
+
+    wire [1:0]dir;
+    assign dir = PathData[7:6];
+
+    wire dis;
+    assign dis = dir[0] || dir[1];
+   
+    mux m1(!InputDir[1],!InputDir[0],InputDir[0],InputDir[1],dir,OutputDir[1]);
+    mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
+   
+
+    assign NL = dis && (!OutputDir[1] && !OutputDir[0]);
+    assign SL = dis && (OutputDir[1] && OutputDir[0]);
+    assign EL = dis && (OutputDir[1] && !OutputDir[0]);
+    assign WL = dis && (!OutputDir[1] && OutputDir[0]);
+
+    assign NewPath = PathData << 2;
+
+
+endmodule
+
+
+module Junction4(InputDir,PathData,NL,SL,EL,WL);
+    input [1:0]InputDir;
+    output [1:0]OutputDir;
+    input [7:0]PathData;
+    output [7:0]NewPath;
+    output NL,SL,EL,WL;
+
+    wire [1:0]dir;
+    assign dir = PathData[7:6];
+
+    wire dis;
+    assign dis = dir[0] || dir[1];
+
+    mux m1(!InputDir[1],!InputDir[0],InputDir[0],InputDir[1],dir,OutputDir[1]);
+    mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
+   
+
+    assign NL = dis && (!OutputDir[1] && !OutputDir[0]);
+    assign SL = dis && (OutputDir[1] && OutputDir[0]);
+    assign EL = dis && (OutputDir[1] && !OutputDir[0]);
+    assign WL = dis && (!OutputDir[1] && OutputDir[0]);
+
+    assign NewPath = PathData << 2;
+
+
+endmodule
+
+
+
+
+module Display_tb;
+
+    reg [2:0] Block;
+wire [7:0] PathData;
+    wire NL1, SL1, EL1, WL1;
+    wire NL2, SL2, EL2, WL2;
+    wire NL3, SL3, EL3, WL3;
+    wire NL4, SL4, EL4, WL4;
+   
+    Display d1(Block,PathData,NL1,SL1,EL1,WL1,NL2,SL2,EL2,WL2,NL3,SL3,EL3,WL3,NL4,SL4,EL4,WL4);
+   
+    initial begin
+        $dumpfile("Display.vcd");
+        $dumpvars(0, Display_tb);
+
+        $display("--------------------------------------------------------------------------------------------------------------------");
+        $display("| Block | PathData | NL1 | SL1 | EL1 | WL1 | NL2 | SL2 | EL2 | WL2 | NL3 | SL3 | EL3 | WL3 | NL4 | SL4 | EL4 | WL4 |");
+        $display("--------------------------------------------------------------------------------------------------------------------");
+        $monitor("|  %b  | %b |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |  %b  |",
+                 Block, PathData, NL1, SL1, EL1, WL1, NL2, SL2, EL2, WL2, NL3, SL3, EL3, WL3, NL4, SL4, EL4, WL4);
+       
+Block=3'b000;
+        repeat(7)
+    begin
+    #10 Block= Block + 3'b001;
+   end
+       
+       
+        #1000 $display("--------------------------------------------------------------------------------------------------------------------");
+
+    end
+endmodule
+
+-----------------------------------------
+
+### 
 
 ### References
 • Morris Mano, Digital Logic and Computer Design
