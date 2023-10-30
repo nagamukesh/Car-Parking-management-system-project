@@ -168,7 +168,7 @@ The OR gate returns 0 bcos all inputs are 0
 So the next clock tick is activated
 So the previous input which is block 2 will be shown until another button is pressed
 
-![Uploading image.png…]()
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/74f0bf4b-09fe-46e1-ac1f-8197f3115fe9)
 
 
 8 outputs connected from 8 D flipflops corresponding to their 8 respective inputs as per
@@ -186,7 +186,7 @@ pressed, so the code will keep displaying the path for block2 until another butt
 pressed (which will be button 7, the reason will be explained later)
 Now, this output block number will be taken as input for Path Generator
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/eff48033-1c1b-4cb9-8fde-b15a663e5bab)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/0ea967e5-bcf8-4f55-9aa3-d4b87afc18bd)
 
 The highlighted component is PathGenerator
 
