@@ -13,28 +13,30 @@ Our Parking Management System, by focusing on improving user experience and faci
 ## Brief Description
 ### (Simulation to describe the user interaction, i.e. Output for various inputs)
 Let us say this is how the screen looks originally
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/5a95ac91-270e-402d-84c4-fbf39faaa595)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/76565e3f-5761-4bcb-bc99-0788351c73bb)
+
 
 Each Block is given a button labeled 0,1,2... Depending on block number Over here, each block has 3 LEDs. If the LED is switched on, it means that a particular parking slot in that block is filled Looking at this diagram, the user can choose which block he wants to park in. NOTE: Junction 1 is the entrance. Let us say, the user wants to park in block 2 He presses the button for block 2.
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/95f529c3-3779-4d92-9003-50f195b6ed5e)
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/f67f7a51-9aec-4141-9380-ce05db840db3)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/4b575ae2-7cb5-4045-8e07-add99371f13e)
+
 
 NOTE: Junction 1 is the entrance. Now, as we can see, the path to Junction2 is generated. At junction1, the north led is on, which means at junction1, the user must go straight. At junction 2, the west led is on, which means at junction 2, the user must go right. If the user follows the above instructions, he will reach the road from which he can enter the parking slot. Now, when the user enters the 3rd slot at block 2. The third sensor(clock), which is present at the entrance of the slot turns on. Which means, the person is going to enter that slot.
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/9fb95197-ce61-4568-8b8b-5752f63b64da)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/ba81b384-edf0-40fc-8a93-e4f9dcd8dcaf)
+
 
 Now that this clock is turned on, the path towards block 2 disappears. Bcos the car will be parked in this slot now, and thus doesn't need the directions anymore. Once the car parks in that slot, he will cross the entrance of that slot. Thus, the sensor(clock) for that slot becomes 0 again.
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/2fad07e7-9c41-4c93-ab10-8da2141bf5c1)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/4bcd3658-5490-4240-a59f-4a27f580cf7d)
 
 As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
 Now, let us see what happens in the case of the next user
 Let us say, the user presses the block2 button and releases it
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/c1d06a55-de2c-498d-8c7a-ada2f5ef278e)
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/a4a1b0c2-44c4-40ae-98de-483bdf9ea6da)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/b05b1c2c-d404-4a54-b7d2-e1a52c8a40d3)
+
 
 even though there are no vacant parking slots
 No path to that block will be shown bcos, that block has no vacant slots
@@ -43,7 +45,8 @@ So, the user must select another block
 Let us assume the user chooses block 0 now
 He presses and releases the button for block 0
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/b7a9ee64-ee26-4faa-bb72-9044c55d990e)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/75a871a3-6f8e-44b7-8311-7797a36e9278)
+
 
 Now, the path for junction 0 is displayed as we can see from the code
 Go straight from junction1
@@ -55,7 +58,8 @@ Now, when the user enters the 1st slot at block6
 The first sensor(clock), which is present at the entrance of the slot turns on
 This means, the person is going to enter that slot
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/c6c196c4-5862-40a5-a5de-ad9fcce99bf6)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/ef5d77c5-6366-41a7-810c-e294d3fcca59)
+
 
 Now that this clock is turned on, the path towards block0 disappears
 Bcos the car will be parked in this slot now, and thus doesn't need the directions
@@ -64,8 +68,6 @@ Once the car parks in that slot
 He will cross the entrance of that slot
 Thus, the sensor(clock) for that slot becomes 0 again
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/f70cc365-1765-4ca9-bfd0-143af1ff03d8)
-
 As we can see,
 Now, on the screen, we can see that the first slot of block 6 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
@@ -73,12 +75,13 @@ Now let us say, the car in the 2nd slot from block 1 is leaving
 Bcos, the car is leaving, it passes through the entrance of that slot
 So that sensor(clock) becomes 1
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/23d926b9-686b-46df-9d19-af946eb727bc)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/c7540a5d-5929-4425-a727-62e989de29b3)
+
 
 Now when he leaves that slot,
 The clock sensor becomes 0 again
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/a5f94374-2776-436a-927f-796796b0a17a)
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/a8ed53fd-dd4d-4751-a7bf-b65582e9a8c8)
 
 As we can see,
 
@@ -86,7 +89,8 @@ The 2nd slot of block1, which was previously filled is now empty
 Thus, there is a vacant spot available in block1 now
 So, if the next user presses the block1 button, the path to block1 will be displayed
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/a9e64278-2ed6-4132-bb4b-45ae6819d193)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/425d5f09-3126-47b0-b119-3361d023cae8)
+
 
 The aforementioned scenario seamlessly amalgamates all potential possibilities and
 eloquently articulates the ensuing outcomes therewithin.
@@ -112,7 +116,8 @@ As we can see, only 3 slots are filled as per the LEDs
 This means a free slot is available
 When the button is pressed, the output is 1
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/a30c22b6-8c6c-4959-9512-d9203121748c)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/81c2b47b-bd46-498e-a035-32b181c6e745)
+
 
 What will happen after this button press is that the path to this block will be displayed by
 the junctions that are triggered by the 1 output that we get when the button is
@@ -134,9 +139,8 @@ The input from Block i is connected to the ith port of BlockChooser
 The Block Chooser will eventually return the BlockNumber of the most recent button
 which is pressed.
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3a5b03a7-a4b0-4345-a749-9c6ccd55e826)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/56293da8-c787-418f-9dec-d96e69128c34)
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/7d697eb6-9d3f-42f2-bc39-5f4f6a2d43c4)
 How this works is
 If button 2 was pressed, the input 2 becomes 1
 And simultaneously the clock tick for each flipflop changes from 0 to 1
@@ -144,7 +148,8 @@ Bcos the OR gate whose output was initially 0
 Returns 1 now
 And the output for the flipflop connected to input 2, becomes 1
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/68160e28-ce5f-4fdc-8810-194a92d4768d)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/d4269b5b-47db-4000-ab51-b6a83051a8b8)
+
 
 Now, bcos the clock is not ticking and is fixed at 1, even if the user presses multiple
 buttons, only the 2nd flipflop output will be considered,
@@ -152,7 +157,8 @@ bcos until the next clock tick, the previous output will be displayed,
 bcos the OR gate still remains at 1 for the added 1 input,
 the clock tick doesn't change and is still at 1
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/e5374183-7958-4344-b5ad-baa8ca58b4d9)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/ddf11210-50cc-49d2-9c0d-31d41cf87727)
+
 
 Now, after the path is generated, which will be explained later
 The user will leave,
@@ -162,7 +168,8 @@ The OR gate returns 0 bcos all inputs are 0
 So the next clock tick is activated
 So the previous input which is block 2 will be shown until another button is pressed
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/c94c90db-3ff2-4918-9889-699bfd2b5369)
+![Uploading image.png…]()
+
 
 8 outputs connected from 8 D flipflops corresponding to their 8 respective inputs as per
 the above diagram will be taken as the corresponding inputs for the Priority Encoder
@@ -565,8 +572,8 @@ initial begin
 end
 
 initial #10000 $finish;
-    
 endmodule
+
 -------------------------
 
 ### Block Circuit
