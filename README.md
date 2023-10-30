@@ -5,6 +5,11 @@ With the growing issues of urbanization and limited parking resources, developin
 
 Our Parking Management System, by focusing on improving user experience and facility management, provides a realistic answer to the issues faced by urban parking, ultimately leading to more efficient and user-centric urban transportation solutions.
 
+## Logisim Circuit Diagram
+
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3e4068b4-5a8a-4d53-a56b-3166f868dd90)
+
+
 ## Brief Description
 ### (Simulation to describe the user interaction, i.e. Output for various inputs)
 Let us say this is how the screen looks originally
@@ -453,6 +458,10 @@ nothing
 As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
+
+### Verilog Code
+
+
 
 ### References
 • Morris Mano, Digital Logic and Computer Design
