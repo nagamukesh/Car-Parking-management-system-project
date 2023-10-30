@@ -408,7 +408,8 @@ Junction4 j4(InputDir4,PathData4,NL4,SL4,EL4,WL4);
 
 Let us assume the PathData is 11111000
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/9ae6520b-1a28-40c9-a388-0a1afab9a6e0)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/9c08c88d-e4d1-41ac-af3f-8608aed66dcd)
+
 
 In this case, the PathData to Block0 is 11111000
 As we can see
@@ -435,7 +436,8 @@ Now, when the user enters the 3rd slot at block2
 The third sensor(clock), which is present at the entrance of the slot turns on
 This means the person is going to enter that slot
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/2e31cc31-853a-46ad-ac1f-48a776e2238a)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/73eeca26-5ae7-4577-885b-cb8b076e6712)
+
 
 Now that this clock is turned on, the path towards block2 disappears
 Bcos the car will be parked in this slot now, and thus doesnt need the directions
@@ -460,7 +462,8 @@ So button 7 is not chosen
 So as per the PathChooser code, the output is block7 for which all junctions still display
 nothing
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/e1740a54-9e34-4d52-8b67-0d39512f5e2d)
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/ae2fd992-acf7-4bc6-8065-1b8871b5adae)
+
 
 As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
