@@ -7,9 +7,9 @@
 > Semester: 3rd Sem B. Tech. CSE
 >Section: S1
 
->Member-1:Konatham Naga Mukesh,221CS132 ```konathamnagamukesh.221cs132.nitk.edu.in```
->Member-2:Lakkimsetti Sreayas,221CS134,```mrlakkimsettisreyas.221cs134@nitk.edu.in```
->Member-3:Tanay Shekokar,221CS159,```tanayshekokar.221cs159@nitk.edu.in```
+* Member-1:Konatham Naga Mukesh,221CS132 ```konathamnagamukesh.221cs132.nitk.edu.in```
+* Member-2:Lakkimsetti Sreayas,221CS134,```mrlakkimsettisreyas.221cs134@nitk.edu.in```
+* Member-3:Tanay Shekokar,221CS159,```tanayshekokar.221cs159@nitk.edu.in```
 
 </details>
 
