@@ -672,10 +672,8 @@ endmodule
 
 ----------------------------------------------
 
-### Junction Code
-
------------------------------------------------
-
+<details>
+<summary>Junction Code</summary>
 module mux(a,b,c,d,sel,out);   // 4*1 mux
 
 input a,b,c,d;
@@ -770,8 +768,8 @@ module Junction4_tb;
 
     end
 endmodule
+</details>
 
-------------------------
 
 <details>
 <summary>Junction Simulation</summary>
