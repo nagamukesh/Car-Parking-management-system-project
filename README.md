@@ -20,7 +20,6 @@ Our Parking Management System, by focusing on improving user experience and faci
 
 <details>
 <summary>Simulation to describe the user interaction, i.e. Output for various inputs</summary>
-### (Simulation to describe the user interaction, i.e. Output for various inputs)
 Let us say this is how the screen looks originally
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/76565e3f-5761-4bcb-bc99-0788351c73bb)
 
@@ -484,15 +483,12 @@ is now full as displayed by the LED after the current user parked in that slot
 
 </details>
 
-### Working:
-
 ## Verilog Code
 -----------------------------------
 
 <details>
 <summary>Block Chooser</summary>
 
-### Block Chooser
     
 //NOTE: Input B7 will be XOR of all sensors(clocks) present for each slot
 //The output block number will be the button number which is pressed last (when slot is empty, which is handled in logisim)
