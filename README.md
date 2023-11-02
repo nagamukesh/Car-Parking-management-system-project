@@ -2,7 +2,7 @@
 
 ## Abstract:
 <details>
-<summary>Cool Dropdown</summary>
+<summary>Details</summary>
 With the growing issues of urbanization and limited parking resources, developing a user-friendly Parking Management System is critical. This project provides a comprehensive system that combines parking slot occupancy detection and real-time slot availability display, with the user experience and parking facility efficiency as the top priorities. This method aims to address frequent urban difficulties such as traffic congestion and long parking search periods, which annoy vehicle owners. By utilizing modern occupancy sensors, central control units, and digital displays, we hope to simplify the parking experience. It detects car presence reliably, updates real-time slot availability, and communicates this information to users, minimizing the time and effort required to find a parking spot. Our unique contribution is the seamless integration of these components, which improves customer pleasure while optimizing space utilization. The system keeps track of entry and exit times, which can be utilized for security and auditing. Furthermore, the obtained data can guide future improvements and data-driven decision-making.
 
 Our Parking Management System, by focusing on improving user experience and facility management, provides a realistic answer to the issues faced by urban parking, ultimately leading to more efficient and user-centric urban transportation solutions.
@@ -10,10 +10,16 @@ Our Parking Management System, by focusing on improving user experience and faci
 
 ## Logisim Circuit Diagram
 
+<details>
+<summary>Image</summary>
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3e4068b4-5a8a-4d53-a56b-3166f868dd90)
+</details>
 
 
 ## Brief Description
+
+<details>
+<summary>Simulation to describe the user interaction, i.e. Output for various inputs</summary>
 ### (Simulation to describe the user interaction, i.e. Output for various inputs)
 Let us say this is how the screen looks originally
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/76565e3f-5761-4bcb-bc99-0788351c73bb)
@@ -100,7 +106,11 @@ eloquently articulates the ensuing outcomes therewithin.
 And this thus, explains what the project does
 We will soon explain the work in the next section
 
-### Working:
+</details>
+
+
+<details>
+<summary>Working</summary>
 Let us go in sequential order, starting from pressing a button until parking in a slot
 Where the work will be explained step by step,
 and each component will be explained on its first occurrence based on the above-order
@@ -472,10 +482,18 @@ As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
 
+</details>
+
+### Working:
+
 ## Verilog Code
 -----------------------------------
-### Block Chooser
 
+<details>
+<summary>Block Chooser</summary>
+
+### Block Chooser
+    
 //NOTE: Input B7 will be XOR of all sensors(clocks) present for each slot
 //The output block number will be the button number which is pressed last (when slot is empty, which is handled in logisim)
 //Bk is actually is button pressed & if free slot is available(from BlockCircuit code)
@@ -580,11 +598,14 @@ end
 initial #10000 $finish;
 endmodule
 
+</details>
+
 -------------------------
 
+<details>
+<summary>Block Circuit</summary>
 ### Block Circuit
 
---------------------------------
 module dflipflop (input D, input CKT, output reg Q);
     always @(posedge CKT) begin
         Q <= D;
@@ -649,6 +670,9 @@ end
 initial #5000 $finish;
     
 endmodule
+</details>
+
+
 
 ----------------------------------------------
 
@@ -753,9 +777,10 @@ endmodule
 
 ------------------------
 
+<details>
+<summary>Junction Simulation</summary>
 ### Junction Simulation
 
-------------------------------------
 
 //We choose path data such that there is only one unique input direction to each junction
 // Eg. The only path to Junction3 is 1101, 11 at Junction1 and 01 at Junction2
@@ -1007,10 +1032,13 @@ Block=3'b000;
     end
 endmodule
 
+</details>
+
+
 -----------------------------------------
 
-### 
-
+<details>
+<summary>References</summary>
 ### References
 • Morris Mano, Digital Logic and Computer Design
 • https://www.flashparking.com/blog/what-is-an-automated-parkingsystem/
@@ -1018,6 +1046,9 @@ endmodule
 • https://www.slideshare.net
 • Sunggu Lee, Advanced Digital Logic Design: Using VHDL, State Machines, and
 Synthesis for FPGAs
+
+</details>
+
 
 
 
