@@ -4,8 +4,8 @@
 <details>
 <summary>Details</summary>
     
-> Semester: 3rd Sem B. Tech. CSE
->Section: S1
+> *  Semester: 3rd Sem B. Tech. CSE
+> * Section: S1
 
 * Member-1:Konatham Naga Mukesh,221CS132 ```konathamnagamukesh.221cs132.nitk.edu.in```
 * Member-2:Lakkimsetti Sreayas,221CS134,```mrlakkimsettisreyas.221cs134@nitk.edu.in```
