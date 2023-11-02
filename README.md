@@ -1052,13 +1052,12 @@ endmodule
 
 <details>
 <summary>References</summary>
-### References
-• Morris Mano, Digital Logic and Computer Design
-• https://www.flashparking.com/blog/what-is-an-automated-parkingsystem/
-• www.wayleadr.com
-• https://www.slideshare.net
-• Sunggu Lee, Advanced Digital Logic Design: Using VHDL, State Machines, and
-Synthesis for FPGAs
+
+* Morris Mano, Digital Logic and Computer Design
+* https://www.flashparking.com/blog/what-is-an-automated-parkingsystem/
+* www.wayleadr.com
+* https://www.slideshare.net
+* Sunggu Lee, Advanced Digital Logic Design: Using VHDL, State Machines, and Synthesis for FPGAs
 
 </details>
 
