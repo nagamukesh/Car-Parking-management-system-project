@@ -1,5 +1,18 @@
 # Car-Parking-management-system-project
 
+## Team Details
+<details>
+<summary>Details</summary>
+    
+> Semester: 3rd Sem B. Tech. CSE
+>Section: S1
+
+>Member-1:Konatham Naga Mukesh,221CS132 ```konathamnagamukesh.221cs132.nitk.edu.in```
+>Member-2:Lakkimsetti Sreayas,221CS134,```mrlakkimsettisreyas.221cs134@nitk.edu.in```
+>Member-3:Tanay Shekokar,221CS159,```tanayshekokar.221cs159@nitk.edu.in```
+
+</details>
+
 ## Abstract:
 <details>
 <summary>Details</summary>
@@ -13,8 +26,7 @@ Our Parking Management System, by focusing on improving user experience and faci
 <details>
 <summary>Circuit Diagram</summary>
 
-![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3e4068b4-5a8a-4d53-a56b-3166f868dd90)
-
+![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/57034059-12f0-4148-b103-b06a6ab30bfd)
 
 </details>
 
