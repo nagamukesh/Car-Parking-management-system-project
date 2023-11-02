@@ -10,7 +10,14 @@ Our Parking Management System, by focusing on improving user experience and faci
 
 ## Logisim Circuit Diagram
 
+<details>
+<summary>Circuit Diagram</summary>
+
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3e4068b4-5a8a-4d53-a56b-3166f868dd90)
+
+
+</details>
+
 
 ## Brief Description
 
