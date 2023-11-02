@@ -107,7 +107,8 @@ We will soon explain the work in the next section
 
 <details>
 <summary>Working</summary>
-    <details>
+<details>
+
 <summary>Introduction</summary>
 Let us go in sequential order, starting from pressing a button until parking in a slot
 Where the work will be explained step by step,
