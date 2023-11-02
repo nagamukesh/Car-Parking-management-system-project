@@ -484,7 +484,6 @@ is now full as displayed by the LED after the current user parked in that slot
 </details>
 
 ## Verilog Code
------------------------------------
 
 <details>
 <summary>Block Chooser</summary>
@@ -596,7 +595,6 @@ endmodule
 
 </details>
 
--------------------------
 
 <details>
 <summary>Block Circuit</summary>
@@ -667,10 +665,6 @@ initial #5000 $finish;
     
 endmodule
 </details>
-
-
-
-----------------------------------------------
 
 <details>
 <summary>Junction Code</summary>
@@ -1028,8 +1022,7 @@ endmodule
 
 </details>
 
-
------------------------------------------
+## References
 
 <details>
 <summary>References</summary>
