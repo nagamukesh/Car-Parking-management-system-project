@@ -10,11 +10,7 @@ Our Parking Management System, by focusing on improving user experience and faci
 
 ## Logisim Circuit Diagram
 
-<details>
-<summary>Image</summary>
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/3e4068b4-5a8a-4d53-a56b-3166f868dd90)
-</details>
-
 
 ## Brief Description
 
@@ -493,7 +489,7 @@ is now full as displayed by the LED after the current user parked in that slot
 //The output block number will be the button number which is pressed last (when slot is empty, which is handled in logisim)
 //Bk is actually is button pressed & if free slot is available(from BlockCircuit code)
 //Note, simulation may not seem perfect since it is not that very feasible to simulate buttons through veriolog
-
+```
 module dflipflop (input D, input CKT, output reg Q);
     always @(posedge CKT) begin
         Q <= D;
@@ -592,14 +588,15 @@ end
 
 initial #10000 $finish;
 endmodule
+```
 
 </details>
 
 
 <details>
 <summary>Block Circuit</summary>
-### Block Circuit
 
+````
 module dflipflop (input D, input CKT, output reg Q);
     always @(posedge CKT) begin
         Q <= D;
@@ -762,13 +759,16 @@ module Junction4_tb;
 
     end
 endmodule
+
+````
+
 </details>
 
 
 <details>
 <summary>Junction Simulation</summary>
-### Junction Simulation
 
+````
 
 //We choose path data such that there is only one unique input direction to each junction
 // Eg. The only path to Junction3 is 1101, 11 at Junction1 and 01 at Junction2
@@ -1019,6 +1019,8 @@ Block=3'b000;
 
     end
 endmodule
+
+````
 
 </details>
 
