@@ -121,14 +121,7 @@ eloquently articulates the ensuing outcomes therewithin.
 And this thus, explains what the project does
 We will soon explain the work in the next section
 
-</details>
 
-
-<details>
-<summary>Working</summary>
-<details>
-
-<summary>Introduction</summary>
 Let us go in sequential order, starting from pressing a button until parking in a slot
 Where the work will be explained step by step,
 and each component will be explained on its first occurrence based on the above-order
@@ -200,10 +193,7 @@ So the next clock tick is activated
 So the previous input which is block 2 will be shown until another button is pressed
 
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/74f0bf4b-09fe-46e1-ac1f-8197f3115fe9)
-</details>
 
-<details>
-<summary>Priority Encoder</summary>
 8 outputs connected from 8 D flipflops corresponding to their 8 respective inputs as per
 the above diagram will be taken as the corresponding inputs for the Priority Encoder
 The Component marked Pri, is a Priority Encoder
@@ -222,10 +212,6 @@ Now, this output block number will be taken as input for Path Generator
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/0ea967e5-bcf8-4f55-9aa3-d4b87afc18bd)
 
 
-</details>
-
-<details>
-<summary>Path Generator</summary>
 The PathGenerator will give PathData as output which will be used by the junctions to
 display the path, i.e. which direction to go towards at each potential junction the user will
 encounter to go to that path.
@@ -313,10 +299,6 @@ easier,
 We can add each light with a display so that nothing is displayed when the display is 0
 So dis= dir[0] & dir[1];
 
-</details>
-
-<details>
-<summary>Truth Table</summary>
 Here is a truth table signifying the same
 
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/dd9924f2-1ed3-4082-82f2-ecd63405d3f9)
@@ -353,10 +335,6 @@ Truth Table for Output Direction
 
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/d3bed5cd-15b3-46f8-94d5-a23f3d1ad4eb)
 
-</details>
-
-<details>
-<summary>K-Map</summary>
 K-Map for OutputDir[1] is
 
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/9c18c71d-f476-4d38-8f5a-bfc09b7a8fe0)
@@ -390,10 +368,6 @@ We can use a multiplexer
 So the effective code is
 mux m2(!InputDir[0],InputDir[1],!InputDir[1],InputDir[0],dir,OutputDir[0]);
 
-</details>
-
-<details>
-<summary>Path Display and Parking of the Car</summary>
 
 After this, if the next junction is at the left
 For the junction at the left
@@ -517,8 +491,6 @@ nothing
 As we can see,
 Now, on the screen, we can see that the third slot of block 2 which was previously empty
 is now full as displayed by the LED after the current user parked in that slot
-
-</details>
 
 </details>
 
