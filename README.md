@@ -34,7 +34,7 @@ Our Parking Management System, by focusing on improving user experience and faci
 ## Brief Description
 
 <details>
-<summary>Simulation to describe the user interaction, i.e. Output for various inputs</summary>
+<summary>Details</summary>
 Let us say this is how the screen looks originally
     
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/76565e3f-5761-4bcb-bc99-0788351c73bb)
