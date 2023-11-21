@@ -1,4 +1,4 @@
-# Car-Parking-management-system-project
+# Car Parking Management System
 
 ## Team Details
 <details>
