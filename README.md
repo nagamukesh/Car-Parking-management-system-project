@@ -24,7 +24,7 @@ Our Parking Management System, by focusing on improving user experience and faci
 ## Logisim Circuit Diagram
 
 <details>
-<summary>Circuit Diagram</summary>
+<summary>Details</summary>
 
 ![image](https://github.com/nagamukesh/Car-Parking-management-system-project/assets/112798996/57034059-12f0-4148-b103-b06a6ab30bfd)
 
@@ -497,7 +497,7 @@ is now full as displayed by the LED after the current user parked in that slot
 ## Verilog Code
 
 <details>
-<summary>Block Chooser</summary>
+<summary>Details</summary>
 
     
 //NOTE: Input B7 will be XOR of all sensors(clocks) present for each slot
@@ -605,11 +605,7 @@ initial #10000 $finish;
 endmodule
 ```
 
-</details>
 
-
-<details>
-<summary>Block Circuit</summary>
 
 ````
 module dflipflop (input D, input CKT, output reg Q);
@@ -777,11 +773,6 @@ endmodule
 
 ````
 
-</details>
-
-
-<details>
-<summary>Junction Simulation</summary>
 
 ````
 
@@ -1042,7 +1033,7 @@ endmodule
 ## References
 
 <details>
-<summary>References</summary>
+<summary>Details</summary>
 
 * Morris Mano, Digital Logic and Computer Design
 * https://www.flashparking.com/blog/what-is-an-automated-parkingsystem/
